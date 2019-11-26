@@ -1,7 +1,6 @@
 # Lafore-2-OrdArray
 
 class Algorithm {
-
     static class OrdArray {
         private long[] a;
         private int nElems;
@@ -58,11 +57,25 @@ class Algorithm {
                 else if (lowerBound > highBound)
                     return -1;
                 else
-                    if (a[curPos] > searchKey)
-                        highBound = curPos-1;
-                    else
-                        lowerBound = curPos+1;
+                if (a[curPos] > searchKey)
+                    highBound = curPos-1;
+                else
+                    lowerBound = curPos+1;
             }
+        }
+
+        public long getElem(int index) {
+            return a[index];
+        }
+
+        public OrdArray merge(OrdArray b) {
+            int newSize = getSize()+b.getSize();
+            OrdArray c = new OrdArray(newSize);
+            for (int i = 0; i < getSize(); i++)
+                c.insert(a[i]);
+            for (int i = 0; i < b.getSize(); i++)
+                c.insert(b.getElem(i));
+            return c;
         }
     }
 
@@ -79,5 +92,14 @@ class Algorithm {
         ordArray.delete(5);
         ordArray.display();
         System.out.println(ordArray.getSize());
+
+        ordArray.insert(5);
+
+        OrdArray newOrdArray = new OrdArray(3);
+        newOrdArray.insert(2);
+        newOrdArray.insert(4);
+        newOrdArray.insert(6);
+        OrdArray c = ordArray.merge(newOrdArray);
+        c.display();
     }
 }
