@@ -1,5 +1,3 @@
-# Lafore-2-OrdArray
-
 class Algorithm {
     static class OrdArray {
         private long[] a;
@@ -77,6 +75,17 @@ class Algorithm {
                 c.insert(b.getElem(i));
             return c;
         }
+
+        public void noDups() {
+            int count = 0;
+            for (int i = 0; i < nElems-1; i++)
+                for (int j = i+1; j < nElems; j++)
+                    if (a[j] == a[i]) {
+                        for (int k = j; k < nElems - 1; k++)
+                            a[k] = a[k + 1];
+                        nElems--;
+                    }
+        }
     }
 
     public static void main(String[] arg) {
@@ -85,6 +94,7 @@ class Algorithm {
         ordArray.insert(7);
         ordArray.insert(5);
         ordArray.insert(3);
+        ordArray.insert(1);
         ordArray.insert(1);
         ordArray.display();
         System.out.println(ordArray.getSize());
@@ -100,6 +110,8 @@ class Algorithm {
         newOrdArray.insert(4);
         newOrdArray.insert(6);
         OrdArray c = ordArray.merge(newOrdArray);
+        c.display();
+        c.noDups();
         c.display();
     }
 }
